@@ -2,7 +2,8 @@
 import api from "@/src/app";
 import { useAuth, AuthContext } from "./AuthContext";
 import {useState, useEffect} from "react";
-import { UserResponse, User } from "@/types/type";
+import { setToken } from "@/lib//Token";
+import { RefreshResponse, User } from "@/types/type";
 export const AuthContextProvider = ({
   children,
 }: {
@@ -15,14 +16,17 @@ export const AuthContextProvider = ({
   try {
     await api.post("/auth/logout");
     setUser(null);
+    setAccessToken("");
   } catch (err) {
     console.log(err);
   }
 };
   const getUser = async () => {
     try {
-      const response = await api.get<UserResponse>("/users/me");
+      const response = await api.get<RefreshResponse >("/auth/refresh");
       setUser(response.data.user);
+      setAccessToken(response.data.accesstoken);
+      setToken(response.data.accesstoken);
       
     } catch (err) {
       console.log(err);
@@ -36,8 +40,8 @@ export const AuthContextProvider = ({
   }, []);
   
   return (
-    <AuthContext.Provider value={{ user, setUser, isLoading , logout}}>
-      {children}
+    <AuthContext.Provider value={{ user, setUser,  accesstoken, isLoading , logout}}>
+      {isLoading ?(<div> Loading</div>) : children}
     </AuthContext.Provider>
   );
 };

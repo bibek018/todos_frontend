@@ -1,14 +1,15 @@
-import { generatetoken } from "@/components/LoginCard";
+import { getAccessToken } from "@/lib/Token";
 import axios from "axios";
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials:true,
   headers: {
     "Content-Type": "application/json",
   },
 });
 api.interceptors.request.use(
   (config) => {
-    const accesstoken = generatetoken();
+    const accesstoken:string =getAccessToken();
     
     if (accesstoken) {
       config.headers.Authorization = `Bearer ${accesstoken}`;

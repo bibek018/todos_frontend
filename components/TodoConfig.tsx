@@ -1,12 +1,38 @@
+"use client"
 import api from "../src/app";
 import { todo, todoResponse } from "../types/type";
 import { TodoDisplay } from "../components/TodoDispaly";
+import {useEffect, useState} from "react"
+import { useAuth } from "@/context/AuthContext";
 const getUserTodos = async (): Promise<todo[]> => {
   const response = await api.get<todoResponse>("/todos");
   return response.data.todos;
 };
-export const TodoConfig = async () => {
-  const userTodos: todo[] = await getUserTodos();
+export const TodoConfig =  () => {
+  const [userTodos, setUserTodos] = useState<todo[] |[]> ([])
+  
+  
+  
+  
+  useEffect(() => {
+    const getUserTodos = async () => {
+      try {
+        const response = await api.get("/todos");
+
+        setUserTodos(response.data.todos);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getUserTodos();
+  }, []);
+
+
+
+
+
+
   return (
     <section className="w-full rounded-3xl border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-cyan-950/20 backdrop-blur-md sm:p-6">
       <div className="mb-5 flex items-end justify-between gap-4">

@@ -23,11 +23,17 @@ export interface todoResponse{
 export interface AuthContextType{
     user:User|null,
     setUser:React.Dispatch<React.SetStateAction<User | null>>,
+    accesstoken:string,
     isLoading:boolean,
     logout:()=>void
 }
 export interface LoginResponse{
     message:string,
+    success:boolean,
+    user:User,
+    accesstoken:string
+}
+export interface RefreshResponse{
     success:boolean,
     user:User,
     accesstoken:string

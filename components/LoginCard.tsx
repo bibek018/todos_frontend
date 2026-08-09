@@ -15,15 +15,12 @@ import api from "@/src/app";
 import { User, UserResponse, LoginResponse } from "../types/type";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-let accesstoken = "";
-export const generatetoken = () => {
-  return accesstoken;
-};
+import { setToken } from "@/lib/Token";
 export function LoginCard() {
   const { setUser } = useAuth();
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.location.href = "http://localhost:3000/api/auth/google";
+    window.location.href = "http://localhost:5001/api/auth/google";
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,8 +37,8 @@ export function LoginCard() {
       if (response?.data?.user) {
         setUser(response.data.user);
       }
+      setToken(response.data.accesstoken);
       router.push("/dashboard");
-      accesstoken = response.data.accesstoken;
     } catch (err) {
       console.log(err);
     }
@@ -81,7 +78,7 @@ export function LoginCard() {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" name="email" type="password" required />
+              <Input id="password" name="password" type="password" required />
             </div>
             <Button type="submit" className="w-full">
               Login

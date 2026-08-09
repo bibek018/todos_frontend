@@ -1,4 +1,3 @@
-import { create } from "domain";
 import { useContext, createContext } from "react";
 import { AuthContextType } from "@/types/type";
 export const AuthContext = createContext<AuthContextType|null>(null);
