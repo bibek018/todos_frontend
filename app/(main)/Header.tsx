@@ -9,6 +9,7 @@ export const Header = () => {
   const handleLogin=()=>{
     router.push("/login");
   }
+  
   const handleRegister=()=>{
     router.push("/register");
   }
@@ -21,6 +22,7 @@ export const Header = () => {
         <section className="flex flex-row gap-4 h-10 justify-center items-center">
           <p className="bg-blue-400 rounded-full px-2 py-1">{user.role}</p>
           <p className="bg-white/20 px-2 py-1 rounded-full">{user.email}</p>
+          <Button className="bg-blue-400" onClick={logout}>Logout</Button>
         </section>
       </section>  
       
