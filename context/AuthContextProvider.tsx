@@ -23,7 +23,7 @@ export const AuthContextProvider = ({
 };
   const getUser = async () => {
     try {
-      const response = await api.get<RefreshResponse >("/auth/refresh");
+      const response = await api.post<RefreshResponse >("/auth/refresh");
       setUser(response.data.user);
       setAccessToken(response.data.accesstoken);
       setToken(response.data.accesstoken);

@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import api from "@/src/app";
@@ -21,6 +22,7 @@ export function LoginCard() {
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.href = "http://localhost:5001/api/auth/google";
+    router.push("/dashboard");
   };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +54,7 @@ export function LoginCard() {
           Enter your email below to login to your account
         </CardDescription>
         <CardAction>
-          <Button variant="link">Sign Up</Button>
+          <Link href="/register" className=" no-underline hover:underline underline-offset-1">Sign up</Link>
         </CardAction>
       </CardHeader>
       <CardContent>
