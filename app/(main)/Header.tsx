@@ -1,57 +1,96 @@
-"use client"
+"use client";
+
 import { useAuth } from "@/context/AuthContext";
-import api from "../../src/app";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-export const Header = () => {
-  const {user,setUser,isLoading, logout} = useAuth();
-  const router = useRouter();
-  const handleLogin=()=>{
-    router.push("/login");
-  }
-  
-  const handleRegister=()=>{
-    router.push("/register");
-  }
-  return(
-    user?(<div className="bg-slate-900 w-full px-10 py-5 rounded-3xl ">
-      <h2 className="text-blue-400 text-2xl">TODO WORKSPACE</h2>
-      <p className="text-4xl font-bold">Welcome back! {user.name}</p>
-      <section className="flex flex-row justify-between items-center">
-        <p>Keep the track of your tasks, update progress quickly, and stay focused in one clean dasboard</p>
-        <section className="flex flex-row gap-4 h-10 justify-center items-center">
-          <p className="bg-blue-400 rounded-full px-2 py-1">{user.role}</p>
-          <p className="bg-white/20 px-2 py-1 rounded-full">{user.email}</p>
-          <Button className="bg-blue-400" onClick={logout}>Logout</Button>
-        </section>
-      </section>  
-      
-    </div>) :
-  
-   ( <div className="bg-slate-900 w-full px-10 py-5 rounded-3xl flex flex-row justify-between items-center  ">
-      <section className=" flex flex-col gap-2">
-        <h2 className="text-blue-400 text-3xl">TODO WORKSPACE</h2>
-       <p className="font-semibold">Keep the track of your tasks, update progress quickly, and stay focused in one clean dasboard</p>
-      </section>
-      <section className=" flex flex-row gap-4 items-center justify-between pr-4">
-      <Button className="bg-white text-black hover:bg-white/50 " onClick={handleLogin} >Login</Button>
-      <Button className="bg-white text-black hover:bg-white/50" onClick={handleRegister}>Register</Button>
-      </section>
-    </div>)
-  
-  )
-    
-};
 
-// <div className="bg-slate-900 w-full px-10 py-5 rounded-3xl ">
-//       <h2 className="text-blue-400 text-2xl">TODO WORKSPACE</h2>
-//       <p className="text-4xl font-bold">Welcome back! {user.name}</p>
-//       <section className="flex flex-row justify-between items-center">
-//         <p>Keep the track of your tasks, update progress quickly, and stay focused in one clean dasboard</p>
-//         <section className="flex flex-row gap-4 h-10 justify-center items-center">
-//           <p className="bg-blue-400 rounded-full px-2 py-1">{user.role}</p>
-//           <p className="bg-white/20 px-2 py-1 rounded-full">{user.email}</p>
-//         </section>
-//       </section>
-      
-//     </div>
+export const Header = () => {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  const handleLogin = () => {
+    router.push("/login");
+  };
+
+  const handleRegister = () => {
+    router.push("/register");
+  };
+
+  return user ? (
+    // Logged-in Header
+    <header className="w-full border-b border-white/10 bg-slate-900 px-4 py-4 text-white sm:px-6 md:px-10 md:py-5">
+      <div className="flex flex-col gap-4">
+        {/* App name + welcome */}
+        <div>
+          <h2 className="text-lg font-bold text-blue-400 sm:text-xl md:text-2xl">
+            TODO WORKSPACE
+          </h2>
+
+          <p className="mt-1 text-base font-semibold text-white sm:text-lg">
+            Welcome back, {user.name}!
+          </p>
+        </div>
+
+        {/* Description + user actions */}
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <p className="text-sm leading-6 text-slate-400 sm:text-base">
+            Keep track of your tasks and update your progress quickly.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {/* Role */}
+            <span className="rounded-full bg-blue-400 px-3 py-1 text-xs font-semibold text-slate-950 sm:text-sm">
+              {user.role}
+            </span>
+
+            {/* Email */}
+            <span className="max-w-55 truncate rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300 sm:max-w-none sm:text-sm">
+              {user.email}
+            </span>
+
+            {/* Logout */}
+            <Button
+              className="h-9 bg-blue-400 px-4 text-sm font-semibold text-slate-950 hover:bg-blue-300"
+              onClick={logout}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      </div>
+    </header>
+  ) : (
+    // Logged-out Header
+    <header className="w-full border-b border-white/10 bg-slate-900 px-4 py-4 text-white sm:px-6 md:px-10 md:py-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        {/* App information */}
+        <section>
+          <h2 className="text-xl font-bold text-blue-400 sm:text-2xl md:text-3xl">
+            TODO WORKSPACE
+          </h2>
+
+          <p className="mt-1 text-sm leading-6 text-slate-400 sm:text-base">
+            Keep track of your tasks and update your progress quickly.
+          </p>
+        </section>
+
+        {/* Auth buttons */}
+        <section className="flex gap-2 sm:gap-3">
+          <Button
+            className="h-9 bg-white px-4 text-sm font-semibold text-black hover:bg-white/80 sm:h-10 sm:px-5"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+
+          <Button
+            className="h-9 bg-white px-4 text-sm font-semibold text-black hover:bg-white/80 sm:h-10 sm:px-5"
+            onClick={handleRegister}
+          >
+            Register
+          </Button>
+        </section>
+      </div>
+    </header>
+  );
+};
