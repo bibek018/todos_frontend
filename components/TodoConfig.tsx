@@ -16,7 +16,6 @@ export const TodoConfig = () => {
       const getUserTodos = async () => {
         try {
           const response = await api.get<todoResponse>("/todos");
-
           setUserTodos(response.data.todos);
         } catch (err) {
           console.log(err);
@@ -25,44 +24,69 @@ export const TodoConfig = () => {
 
       getUserTodos();
     }
-  }, [isLoading, user, userTodos]);
+  }, [isLoading, user]);
 
   return (
-    <section className=" rounded-3xl border border-white/10 bg-slate-900/80 p-4 shadow-2xl shadow-cyan-950/20 backdrop-blur-md sm:p-6">
-      <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+    <div className="w-full max-w-6xl mx-auto space-y-8">
+      {/* Workspace Header */}
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-white/10 pb-6">
         <div>
-          <h2 className="text-xl font-semibold text-white sm:text-2xl">
-            Your todos
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent">
+            Workspace Dashboard
           </h2>
-
-          <p className="text-sm leading-6 text-slate-400">
-            Review what is active and what still needs attention.
+          <p className="mt-1.5 text-sm text-slate-400">
+            Review active tasks, update progression status, and add new items.
           </p>
         </div>
       </div>
 
-      <div className="flex flex-col w-screen lg:flex-row lg:items-start lg:justify-around">
-        <div className="w-full lg:w-1/2 space-y-3">
-          <div className="w-full flex flex-row justify-end ">
-            <span className="w-fit rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-slate-300">
-            {userTodos.length} items
-          </span>
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Side: Todo List */}
+        <div className="w-full lg:col-span-8 order-2 lg:order-1 space-y-6">
+          <div className="flex items-center justify-between border-b border-white/5 pb-4">
+            <h3 className="text-lg font-semibold text-white">Your Tasks</h3>
+            <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
+              {userTodos.length} {userTodos.length === 1 ? "task" : "tasks"}
+            </span>
           </div>
+
           {userTodos.length > 0 ? (
-            userTodos.map((todo: todo) => (
-              <TodoDisplay key={todo._id} todo={todo} />
-            ))
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {userTodos.map((todo: todo) => (
+                <TodoDisplay key={todo._id} todo={todo} setUserTodos={setUserTodos} />
+              ))}
+            </div>
           ) : (
-            <div className="rounded-2xl border border-white/10 bg-slate-950/20 px-4 py-8 text-center text-base text-slate-400 sm:py-10 sm:text-xl">
-              No todos yet. Add your first task to get started.
+            <div className="rounded-3xl border border-dashed border-white/10 bg-slate-900/20 px-6 py-12 text-center backdrop-blur-sm">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400">
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                  />
+                </svg>
+              </div>
+              <h3 className="mt-4 text-sm font-semibold text-white">No tasks found</h3>
+              <p className="mt-2 text-xs text-slate-400">
+                Get started by creating a new task on the right.
+              </p>
             </div>
           )}
         </div>
 
-        <div className="w-full lg:w-1/2">
+        {/* Right Side: Add Todo (Sticky Sidebar) */}
+        <div className="w-full lg:col-span-4 order-1 lg:order-2 lg:sticky lg:top-6">
           <TodoAdd userTodos={userTodos} setUserTodos={setUserTodos} />
         </div>
       </div>
-    </section>
+    </div>
   );
 };

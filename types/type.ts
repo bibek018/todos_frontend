@@ -38,3 +38,4 @@ export interface RefreshResponse{
     user:User,
     accessToken:string
 }
+export type TodoState = "loading"|"success" | "error";

@@ -16,29 +16,29 @@ import { Label } from "@/components/ui/label";
 import { PencilLine } from "lucide-react";
 import { todo } from "@/types/type";
 import api from "@/src/app";
-import { useRouter } from "next/navigation";
 
 interface TodoHandler {
   todo: todo;
+  setUserTodos: React.Dispatch<React.SetStateAction<todo[] | []>>;
 }
 
-export const UpdateDialog = ({ todo }: TodoHandler) => {
-  const router = useRouter();
-
+export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       const formData = new FormData(event.currentTarget);
-      const title = formData.get("todo") as string;
-      const status = formData.get("status") as string;
+      const title = (formData.get("todo") as string).trim();
+      const status = formData.get("status") as todo["status"];
 
       await api.put(`/todos/${todo._id}`, {
         title,
         status,
       });
 
-      router.refresh();
+      setUserTodos((current) =>
+        current.map((t) => (t._id === todo._id ? { ...t, title, status } : t))
+      );
     } catch (err) {
       console.log(err);
     }
@@ -81,10 +81,11 @@ export const UpdateDialog = ({ todo }: TodoHandler) => {
                 id={`status-${todo._id}`}
                 name="status"
                 defaultValue={todo.status}
+                className="h-9 w-full min-w-0 rounded-lg border border-input bg-slate-950 px-2.5 py-1 text-sm text-slate-100 outline-none transition duration-200 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/10 focus-visible:ring-3 focus-visible:ring-ring/50"
               >
-                <option value="not started">not started</option>
-                <option value="in progress">in progress</option>
-                <option value="completed">completed</option>
+                <option value="not started" className="bg-slate-950 text-slate-100">not started</option>
+                <option value="in progress" className="bg-slate-950 text-slate-100">in progress</option>
+                <option value="completed" className="bg-slate-950 text-slate-100">completed</option>
               </select>
             </Field>
           </FieldGroup>

@@ -2,7 +2,6 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -11,17 +10,18 @@ import {
 import { Button } from "./ui/button";
 import { todo } from "@/types/type";
 import api from "@/src/app";
-import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
+
 interface Todohandler {
   todo: todo;
+  setUserTodos: React.Dispatch<React.SetStateAction<todo[] | []>>;
 }
-import { Trash2 } from "lucide-react";
-export const DeleteDialog = ({ todo }: Todohandler) => {
-  const router = useRouter();
+
+export const DeleteDialog = ({ todo, setUserTodos }: Todohandler) => {
   const handleDelete = async () => {
     try {
       await api.delete(`/todos/${todo._id}`);
-      router.refresh();
+      setUserTodos((current) => current.filter((t) => t._id !== todo._id));
     } catch (err) {
       console.log(err);
     }
