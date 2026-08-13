@@ -10,6 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import api from "@/src/app";
@@ -25,8 +27,12 @@ export function LoginCard() {
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.href = "http://localhost:5001/api/auth/google";
-    router.push("/dashboard");
+   
   };
+  const handleGitHubLogin=()=>{
+    window.location.href="http://localhost:5001/api/auth/github";
+  
+  }
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -115,7 +121,16 @@ export function LoginCard() {
           className="w-full bg-black hover:bg-black/50"
           onClick={handleGoogleLogin}
         >
+          <FcGoogle size={20}/>
           Login with Google
+        </Button>
+        <Button
+          variant="outline"
+          className="w-full bg-black hover:bg-black/50"
+          onClick={handleGitHubLogin}
+        >
+          <FaGithub size={20}/>
+          Login with GitHub
         </Button>
       </CardFooter>
     </Card>
