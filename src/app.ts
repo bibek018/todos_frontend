@@ -37,7 +37,22 @@ api.interceptors.response.use(
     return response;
   },
  async (error) => {
-    
+    const originalRequest = error.config;
+
+    if(error.response.status ===401 && !originalRequest._retry){
+      originalRequest._retry=true;
+      try{
+        const response  = await api.post("/auth/refresh");
+        setToken(response.data.accessToken);
+        return api(originalRequest);
+
+      }
+      catch(refresherror){
+        setToken("");
+        return Promise.reject(refresherror);
+      }
+    }
+    return Promise.reject(error);
   },
 );
 export default api;
