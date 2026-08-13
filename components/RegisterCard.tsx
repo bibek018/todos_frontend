@@ -27,7 +27,7 @@ const RegisterCard = () => {
       await api.post("/auth/register",{
         name, email, password
       });
-      router.push("/login");
+      router.replace("/login");
     } catch (err) {
       console.log(err);
     }

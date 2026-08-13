@@ -34,7 +34,7 @@ export const TodoDisplay = ({ todo, setUserTodos }: Todohandler) => {
           </div>
 
           {/* Title */}
-          <p className="break-words text-base font-semibold leading-relaxed text-slate-200 group-hover:text-white sm:text-lg">
+          <p className="wrap-break-word text-base font-semibold leading-relaxed text-slate-200 group-hover:text-white sm:text-lg">
             {todo.title}
           </p>
         </div>

@@ -17,8 +17,10 @@ import { User, UserResponse, LoginResponse } from "../types/type";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { setToken } from "@/lib/Token";
+import { useState } from "react";
 export function LoginCard() {
   const { setUser } = useAuth();
+  const [isValid, setIsValid] = useState<boolean>(true);
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.href = "http://localhost:5001/api/auth/google";
@@ -39,10 +41,12 @@ export function LoginCard() {
       if (response?.data?.user) {
         setUser(response.data.user);
       }
+      setIsValid(true);
       setToken(response.data.accesstoken);
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } catch (err) {
       console.log(err);
+      setIsValid(false);
     }
   };
 
@@ -82,6 +86,9 @@ export function LoginCard() {
               </div>
               <Input id="password" name="password" type="password" required />
             </div>
+            {!isValid && (
+              <div className="font-semibold text-red-400 w-full text-center " >Invalid Email or Password, Try Again</div>
+            )}
             <Button type="submit" className="w-full">
               Login
             </Button>

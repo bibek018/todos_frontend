@@ -1,27 +1,32 @@
 "use client";
 
 import api from "../src/app";
-import { todo, todoResponse } from "../types/type";
+import { todo, todoResponse, TodoState } from "../types/type";
 import { TodoDisplay } from "./TodoDisplay";
+import {TodoSkeleton} from "./TodoSkeleton"
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { TodoAdd } from "./TodoAdd";
+import { TodoError } from "./TodoError";
 
 export const TodoConfig = () => {
+  const [status, setStatus] = useState<TodoState>("loading");
   const { user, isLoading } = useAuth();
   const [userTodos, setUserTodos] = useState<todo[] | []>([]);
 
+  const getUserTodos = async () => {
+    try {
+      const response = await api.get<todoResponse>("/todos");
+      setUserTodos(response.data.todos);
+      setStatus("success")
+    } catch (err) {
+      console.log(err);
+      setStatus("error")
+    }
+  };
+
   useEffect(() => {
     if (!isLoading && user) {
-      const getUserTodos = async () => {
-        try {
-          const response = await api.get<todoResponse>("/todos");
-          setUserTodos(response.data.todos);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-
       getUserTodos();
     }
   }, [isLoading, user]);
@@ -43,7 +48,9 @@ export const TodoConfig = () => {
       {/* Main Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Side: Todo List */}
-        <div className="w-full lg:col-span-8 order-2 lg:order-1 space-y-6">
+        
+        {/*status success */}
+        {status==="success" && (<div className="w-full lg:col-span-8 order-2 lg:order-1 space-y-6">
           <div className="flex items-center justify-between border-b border-white/5 pb-4">
             <h3 className="text-lg font-semibold text-white">Your Tasks</h3>
             <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
@@ -81,10 +88,15 @@ export const TodoConfig = () => {
             </div>
           )}
         </div>
+        )}
+        {/* status loading */}
+        {status ==="loading" && <TodoSkeleton/>}
 
+        {/* status error */}
+        {status ==="error" && <TodoError getUserTodos={getUserTodos}/>}
         {/* Right Side: Add Todo (Sticky Sidebar) */}
         <div className="w-full lg:col-span-4 order-1 lg:order-2 lg:sticky lg:top-6">
-          <TodoAdd userTodos={userTodos} setUserTodos={setUserTodos} />
+          <TodoAdd userTodos={userTodos} setUserTodos={setUserTodos} setStatus={setStatus} />
         </div>
       </div>
     </div>

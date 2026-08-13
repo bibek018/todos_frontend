@@ -15,12 +15,13 @@ export const AuthContextProvider = ({
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [accessToken , setAccessToken] = useState<string>("")
+  //logout function
   const logout = async () => {
   try {
     await api.post("/auth/logout");
     setUser(null);
     setAccessToken("");
-    router.push("/");
+    router.replace("/");
     
   } catch (err) {
     console.log(err);

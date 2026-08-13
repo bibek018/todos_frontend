@@ -1,21 +1,30 @@
 "use client";
 import api from "@/src/app";
 import { useState } from "react";
-import { todo } from "@/types/type";
+import { todo, TodoState } from "@/types/type";
+
 interface UsersAllTodos {
   userTodos: todo[];
   setUserTodos: React.Dispatch<React.SetStateAction<todo[] | []>>;
+  setStatus: React.Dispatch<React.SetStateAction<TodoState>>;
 }
-export const TodoAdd = ({ userTodos, setUserTodos }: UsersAllTodos) => {
+export const TodoAdd = ({ userTodos, setUserTodos, setStatus }: UsersAllTodos) => {
   const [title, setTitle] = useState<string>("");
+  const [msg, setMsg] = useState<boolean>(false);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
-
+    if(title.trim().length <8  ){
+      setMsg(true);
+      return;
+    }
     try {
+
       const response = await api.post("/todos", { title: title.trim() });
-      setUserTodos((current) => [...current, response.data.todo]);
+      setUserTodos((current) => [response.data.todo, ...current]);
       setTitle("");
+      setMsg(false);
+      setStatus("success");
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +54,11 @@ export const TodoAdd = ({ userTodos, setUserTodos }: UsersAllTodos) => {
             className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3.5 text-sm text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/10"
           />
         </div>
+        {msg && (
+          <p className="text-xs font-semibold text-rose-400 transition-all duration-200">
+            Task title must be at least 8 characters long.
+          </p>
+        )}
         <button
           type="submit"
           disabled={!title.trim()}
