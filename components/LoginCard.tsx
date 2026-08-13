@@ -18,9 +18,10 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { setToken } from "@/lib/Token";
 import { useState } from "react";
+import axios from "axios";
 export function LoginCard() {
   const { setUser } = useAuth();
-  const [isValid, setIsValid] = useState<boolean>(true);
+  const [errorMsg, setErrorMsg] = useState<string|null>(null);
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
     window.location.href = "http://localhost:5001/api/auth/google";
@@ -29,6 +30,7 @@ export function LoginCard() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMsg(null);
     const formdata = new FormData(e.currentTarget);
     const email = formdata.get("email");
     const password = formdata.get("password");
@@ -41,12 +43,24 @@ export function LoginCard() {
       if (response?.data?.user) {
         setUser(response.data.user);
       }
-      setIsValid(true);
+      
       setToken(response.data.accesstoken);
       router.replace("/dashboard");
     } catch (err) {
       console.log(err);
-      setIsValid(false);
+      if(axios.isAxiosError(err)){
+        const status = err.response?.status ?? 0;
+        if(status ===401)
+        {
+          setErrorMsg("Invalid Email or Password, Try Again");
+        }
+        else if(status >=500){
+          setErrorMsg("Internal Error, Try after some time")
+        }
+        else{
+          setErrorMsg("Something went wrong, Please Try Again")
+        }
+      }
     }
   };
 
@@ -86,8 +100,8 @@ export function LoginCard() {
               </div>
               <Input id="password" name="password" type="password" required />
             </div>
-            {!isValid && (
-              <div className="font-semibold text-red-400 w-full text-center " >Invalid Email or Password, Try Again</div>
+            { errorMsg && (
+              <div className="font-semibold text-red-400 w-full text-center " >{errorMsg}</div>
             )}
             <Button type="submit" className="w-full">
               Login

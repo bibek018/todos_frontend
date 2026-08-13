@@ -81,23 +81,23 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
                 id={`status-${todo._id}`}
                 name="status"
                 defaultValue={todo.status}
-                className="h-9 w-full min-w-0 rounded-lg border border-input bg-slate-950 px-2.5 py-1 text-sm text-slate-100 outline-none transition duration-200 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/10 focus-visible:ring-3 focus-visible:ring-ring/50"
+                className="h-9 w-full min-w-0 rounded-lg border border-input bg-white px-2.5 py-1 text-sm text-slate-800 outline-none transition duration-200  focus:ring-2   focus-visible:ring-ring/50"
               >
-                <option value="not started" className="bg-slate-950 text-slate-100">not started</option>
-                <option value="in progress" className="bg-slate-950 text-slate-100">in progress</option>
-                <option value="completed" className="bg-slate-950 text-slate-100">completed</option>
+                <option value="not started" className="bg-white text-black">not started</option>
+                <option value="in progress" className="bg-white text-black">in progress</option>
+                <option value="completed" className="bg-white text-black">completed</option>
               </select>
             </Field>
           </FieldGroup>
 
           <DialogFooter>
-            <DialogClose className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition hover:border-cyan-400/30 hover:bg-white/10 hover:text-white">
+            <DialogClose className="inline-flex items-center justify-center rounded-lg border border-white/10  px-4 py-2 text-sm font-medium text-slate-100 transition bg-slate-700 hover:bg-slate-900">
               Cancel
             </DialogClose>
 
             <DialogClose
               type="submit"
-              className="inline-flex items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition hover:bg-cyan-500/20 hover:text-cyan-100"
+              className="inline-flex items-center justify-center rounded-lg border bg-slate-700 border-cyan-400/30 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-slate-900"
             >
               Save changes
             </DialogClose>

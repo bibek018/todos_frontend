@@ -36,7 +36,7 @@ export const TodoConfig = () => {
       {/* Workspace Header */}
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-white/10 pb-6">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold tracking-tight  sm:text-3xl lg:text-4xl bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent">
             Workspace Dashboard
           </h2>
           <p className="mt-1.5 text-sm text-slate-400">
