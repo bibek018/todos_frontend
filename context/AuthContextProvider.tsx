@@ -29,7 +29,7 @@ export const AuthContextProvider = ({
 };
   const getUser = async () => {
     try {
-      const response = await api.post<RefreshResponse >("/auth/refresh", {"axios-retry": { retries: 0 },});
+      const response = await api.post<RefreshResponse >("/auth/refresh", null, {"axios-retry": { retries: 0 },});
       setToken(response.data.accessToken);
       setUser(response.data.user);
       setAccessToken(response.data.accessToken);

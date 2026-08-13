@@ -1,10 +1,10 @@
-import { getAccessToken } from "@/lib/Token";
+import { getAccessToken, setToken } from "@/lib/Token";
 import axios, { AxiosError } from "axios";
 import axiosRetry from "axios-retry";
-import { error } from "console";
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
+  timeout:2000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -36,8 +36,8 @@ api.interceptors.response.use(
   (response) => {
     return response;
   },
-  (error) => {
-    return Promise.reject(error);
+ async (error) => {
+    
   },
 );
 export default api;
