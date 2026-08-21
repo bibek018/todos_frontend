@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PencilLine } from "lucide-react";
 import { todo } from "@/types/type";
-import api from "@/src/app";
+import api from "@/lib/app";
 
 interface TodoHandler {
   todo: todo;

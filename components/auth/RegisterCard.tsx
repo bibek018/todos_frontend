@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import api from "@/src/app";
+import api from "@/lib/app";
 import { useRouter } from "next/navigation";
 
 const RegisterCard = () => {

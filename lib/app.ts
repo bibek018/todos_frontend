@@ -9,6 +9,13 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
+const refreshApi = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  withCredentials: true,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 axiosRetry(api, {
   retries: 3,
   retryDelay: axiosRetry.exponentialDelay,
@@ -39,10 +46,10 @@ api.interceptors.response.use(
  async (error) => {
     const originalRequest = error.config;
 
-    if(error.response.status ===401 && !originalRequest._retry){
+    if(error.response?.status ===401 && !originalRequest?._retry){
       originalRequest._retry=true;
       try{
-        const response  = await api.post("/auth/refresh");
+        const response  = await refreshApi.post("/auth/refresh");
         setToken(response.data.accessToken);
         return api(originalRequest);
 

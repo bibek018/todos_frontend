@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
 import { todo } from "@/types/type";
-import api from "@/src/app";
+import api from "@/lib/app";
 import { Trash2 } from "lucide-react";
 
 interface Todohandler {
