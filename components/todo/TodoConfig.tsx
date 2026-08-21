@@ -1,7 +1,7 @@
 "use client";
 
-import api from "../src/app";
-import { todo, todoResponse, TodoState } from "../types/type";
+import api from "@/lib/app";
+import { todo, todoResponse, TodoState } from "@/types/type";
 import { TodoDisplay } from "./TodoDisplay";
 import {TodoSkeleton} from "./TodoSkeleton"
 import { useEffect, useState } from "react";
@@ -27,6 +27,7 @@ export const TodoConfig = () => {
 
   useEffect(() => {
     if (!isLoading && user) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       getUserTodos();
     }
   }, [isLoading, user]);
@@ -34,12 +35,12 @@ export const TodoConfig = () => {
   return (
     <div className="w-full max-w-6xl mx-auto space-y-8">
       {/* Workspace Header */}
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-white/10 pb-6">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between border-b border-border pb-6">
         <div>
           <h2 className="text-2xl font-bold tracking-tight  sm:text-3xl lg:text-4xl bg-linear-to-r from-cyan-400 via-blue-400 to-indigo-500 bg-clip-text text-transparent">
             Workspace Dashboard
           </h2>
-          <p className="mt-1.5 text-sm text-slate-400">
+          <p className="mt-1.5 text-sm text-muted-foreground">
             Review active tasks, update progression status, and add new items.
           </p>
         </div>
@@ -51,9 +52,9 @@ export const TodoConfig = () => {
         
         {/*status success */}
         {status==="success" && (<div className="w-full lg:col-span-8 order-2 lg:order-1 space-y-6">
-          <div className="flex items-center justify-between border-b border-white/5 pb-4">
-            <h3 className="text-lg font-semibold text-white">Your Tasks</h3>
-            <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-400">
+          <div className="flex items-center justify-between border-b border-border/50 pb-4">
+            <h3 className="text-lg font-semibold text-foreground">Your Tasks</h3>
+            <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
               {userTodos.length} {userTodos.length === 1 ? "task" : "tasks"}
             </span>
           </div>
@@ -65,8 +66,8 @@ export const TodoConfig = () => {
               ))}
             </div>
           ) : (
-            <div className="rounded-3xl border border-dashed border-white/10 bg-slate-900/20 px-6 py-12 text-center backdrop-blur-sm">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400">
+            <div className="rounded-3xl border border-dashed border-border bg-muted/20 px-6 py-12 text-center backdrop-blur-xs">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
                 <svg
                   className="h-6 w-6"
                   fill="none"
@@ -81,8 +82,8 @@ export const TodoConfig = () => {
                   />
                 </svg>
               </div>
-              <h3 className="mt-4 text-sm font-semibold text-white">No tasks found</h3>
-              <p className="mt-2 text-xs text-slate-400">
+              <h3 className="mt-4 text-sm font-semibold text-foreground">No tasks found</h3>
+              <p className="mt-2 text-xs text-muted-foreground">
                 Get started by creating a new task on the right.
               </p>
             </div>

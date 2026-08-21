@@ -118,7 +118,7 @@ export function LoginCard() {
       <CardFooter className="flex-col gap-2">
         <Button
           variant="outline"
-          className="w-full bg-black hover:bg-black/50"
+          className="w-full border-border bg-background hover:bg-accent text-foreground"
           onClick={handleGoogleLogin}
         >
           <FcGoogle size={20}/>
@@ -126,7 +126,7 @@ export function LoginCard() {
         </Button>
         <Button
           variant="outline"
-          className="w-full bg-black hover:bg-black/50"
+          className="w-full border-border bg-background hover:bg-accent text-foreground"
           onClick={handleGitHubLogin}
         >
           <FaGithub size={20}/>

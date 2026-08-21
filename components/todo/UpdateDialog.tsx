@@ -13,6 +13,7 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { PencilLine } from "lucide-react";
 import { todo } from "@/types/type";
 import api from "@/lib/app";
@@ -47,7 +48,7 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
   return (
     <Dialog>
       <DialogTrigger
-        className="inline-flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-200"
+        className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background dark:border-white/10 dark:bg-white/5 text-cyan-600 dark:text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-500 dark:hover:text-cyan-200"
         aria-label="Edit todo"
       >
         <PencilLine className="h-4 w-4" />
@@ -59,7 +60,7 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
             <DialogTitle>Edit Todo</DialogTitle>
 
             <DialogDescription>
-              Make changes to your Todo here. Click save when you're done.
+              Make changes to your Todo here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
 
@@ -81,26 +82,22 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
                 id={`status-${todo._id}`}
                 name="status"
                 defaultValue={todo.status}
-                className="h-9 w-full min-w-0 rounded-lg border border-input bg-white px-2.5 py-1 text-sm text-slate-800 outline-none transition duration-200  focus:ring-2   focus-visible:ring-ring/50"
+                className="h-9 w-full min-w-0 rounded-lg border border-input bg-background px-2.5 py-1 text-sm text-foreground outline-none transition duration-200 focus:ring-2 focus-visible:ring-ring/50 dark:bg-slate-900"
               >
-                <option value="not started" className="bg-white text-black">not started</option>
-                <option value="in progress" className="bg-white text-black">in progress</option>
-                <option value="completed" className="bg-white text-black">completed</option>
+                <option value="not started" className="bg-background text-foreground">not started</option>
+                <option value="in progress" className="bg-background text-foreground">in progress</option>
+                <option value="completed" className="bg-background text-foreground">completed</option>
               </select>
             </Field>
           </FieldGroup>
 
           <DialogFooter>
-            <DialogClose className="inline-flex items-center justify-center rounded-lg border border-white/10  px-4 py-2 text-sm font-medium text-slate-100 transition bg-slate-700 hover:bg-slate-900">
-              Cancel
-            </DialogClose>
+            <DialogClose render={<Button variant="outline" type="button" className="h-9 px-4">Cancel</Button>} />
 
             <DialogClose
               type="submit"
-              className="inline-flex items-center justify-center rounded-lg border bg-slate-700 border-cyan-400/30 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-slate-900"
-            >
-              Save changes
-            </DialogClose>
+              render={<Button type="submit" className="h-9 px-4">Save changes</Button>}
+            />
           </DialogFooter>
         </form>
       </DialogContent>

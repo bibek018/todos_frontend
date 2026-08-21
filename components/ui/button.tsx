@@ -10,13 +10,13 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
         outline:
-          "border-white/10 bg-white/5 text-slate-100 hover:border-cyan-400/30 hover:bg-white/10 hover:text-white aria-expanded:border-cyan-400/30 aria-expanded:bg-white/10 aria-expanded:text-white",
+          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary/80",
         ghost:
-          "text-slate-200 hover:bg-white/10 hover:text-white aria-expanded:bg-white/10 aria-expanded:text-white",
+          "text-foreground hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         destructive:
-          "bg-rose-500/10 text-rose-300 hover:bg-rose-500/20 focus-visible:border-rose-400/40 focus-visible:ring-rose-400/20",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {

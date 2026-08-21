@@ -6,9 +6,9 @@ interface TypeUserTodo {
 
 export const TodoError = ({ getUserTodos }: TypeUserTodo) => {
   return (
-    <div className="w-full rounded-2xl border border-rose-500/20 bg-slate-900/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-rose-500/30 hover:bg-slate-900/60 hover:shadow-xl hover:shadow-rose-950/10">
+    <div className="w-full rounded-2xl border border-rose-500/20 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-rose-500/30 dark:bg-slate-900/40 hover:shadow-xl hover:shadow-rose-950/5">
       <div className="flex flex-col items-center justify-center text-center gap-4 py-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-400">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
           <svg
             className="h-6 w-6"
             fill="none"
@@ -24,12 +24,13 @@ export const TodoError = ({ getUserTodos }: TypeUserTodo) => {
           </svg>
         </div>
         <div className="space-y-1">
-          <p className="text-sm font-semibold text-white">Failed to load tasks</p>
-          <p className="text-xs text-slate-400">Please check your connection and try again.</p>
+          <p className="text-sm font-semibold text-foreground">Failed to load tasks</p>
+          <p className="text-xs text-muted-foreground">Please check your connection and try again.</p>
         </div>
         <Button
           onClick={getUserTodos}
-          className="mt-2 rounded-xl bg-rose-500/10 border border-rose-500/20 px-4 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-500/20 transition-all duration-200"
+          variant="outline"
+          className="mt-2 border-rose-500/20 bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400"
         >
           Try Again
         </Button>
