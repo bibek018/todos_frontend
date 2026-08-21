@@ -6,7 +6,7 @@ interface TypeUserTodo {
 
 export const TodoError = ({ getUserTodos }: TypeUserTodo) => {
   return (
-    <div className="w-full rounded-2xl border border-rose-500/20 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-rose-500/30 dark:bg-slate-900/40 hover:shadow-xl hover:shadow-rose-950/5">
+    <div className="w-full rounded-2xl border border-rose-500/20 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-rose-500/30 hover:shadow-xl hover:shadow-rose-950/5">
       <div className="flex flex-col items-center justify-center text-center gap-4 py-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
           <svg

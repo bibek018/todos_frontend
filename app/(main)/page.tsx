@@ -61,7 +61,7 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {/* Feature 1 */}
-          <div className="rounded-3xl border border-border bg-card/60 dark:bg-slate-900/40 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
+          <div className="rounded-3xl border border-border bg-card/60 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-2xl font-bold">
               ✓
             </div>
@@ -77,7 +77,7 @@ export default function Home() {
           </div>
 
           {/* Feature 2 */}
-          <div className="rounded-3xl border border-border bg-card/60 dark:bg-slate-900/40 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
+          <div className="rounded-3xl border border-border bg-card/60 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 text-2xl font-bold">
               ↻
             </div>
@@ -93,7 +93,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3 */}
-          <div className="rounded-3xl border border-border bg-card/60 dark:bg-slate-900/40 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
+          <div className="rounded-3xl border border-border bg-card/60 p-7 shadow-lg backdrop-blur-md transition hover:-translate-y-1 hover:border-cyan-500/30 hover:shadow-xl">
             <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 text-2xl font-bold">
               ⚡
             </div>
@@ -111,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="border-y border-border bg-muted/30 dark:bg-slate-900/20">
+      <section className="border-y border-border bg-muted/30">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
@@ -130,7 +130,7 @@ export default function Home() {
             </div>
 
             <div className="space-y-4">
-              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 dark:bg-slate-950/40 p-5">
+              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 p-5">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-500 font-bold text-white dark:text-slate-950 shadow-sm">
                   1
                 </span>
@@ -143,7 +143,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 dark:bg-slate-950/40 p-5">
+              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 p-5">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-500 font-bold text-white dark:text-slate-950 shadow-sm">
                   2
                 </span>
@@ -156,7 +156,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 dark:bg-slate-950/40 p-5">
+              <div className="flex gap-4 rounded-2xl border border-border bg-card/50 p-5">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-600 dark:bg-cyan-500 font-bold text-white dark:text-slate-950 shadow-sm">
                   3
                 </span>

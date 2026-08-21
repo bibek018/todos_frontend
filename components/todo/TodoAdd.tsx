@@ -33,7 +33,7 @@ export const TodoAdd = ({ userTodos, setUserTodos, setStatus }: UsersAllTodos) =
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full h-fit rounded-3xl border border-border bg-card/60 p-6 shadow-xl shadow-cyan-950/5 backdrop-blur-md sm:p-8 dark:bg-slate-900/40"
+      className="w-full h-fit rounded-3xl border border-border bg-card/60 p-6 shadow-xl shadow-cyan-950/5 backdrop-blur-md sm:p-8"
     >
       <div className="mb-6 space-y-2">
         <h2 className="text-xl font-bold text-foreground tracking-tight">Create Task</h2>

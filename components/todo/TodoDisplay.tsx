@@ -17,7 +17,7 @@ export const TodoDisplay = ({ todo, setUserTodos }: Todohandler) => {
         : "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20";
 
   return (
-    <article className="group w-full rounded-2xl border border-border bg-card/60 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/30 dark:hover:bg-slate-900/40 hover:bg-card hover:shadow-xl dark:bg-slate-900/20 hover:shadow-cyan-950/5">
+    <article className="group w-full rounded-2xl border border-border bg-card/60 p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/30 hover:bg-card hover:shadow-xl hover:shadow-cyan-950/5">
       <div className="flex h-full flex-col justify-between gap-5">
         <div className="space-y-4">
           {/* Header: Label + Status */}

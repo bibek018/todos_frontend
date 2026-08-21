@@ -5,15 +5,15 @@ export const TodoSkeleton = () => {
         return (
           <article
             key={item}
-            className="animate-pulse w-full rounded-2xl border border-border bg-card p-5 transition-all duration-300 dark:bg-slate-900/20 shadow-sm"
+            className="animate-pulse w-full rounded-2xl border border-border bg-card p-5 transition-all duration-300 shadow-sm"
           >
             <div className="flex h-full flex-col justify-between gap-5">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="h-3 w-12 rounded bg-muted dark:bg-white/10" />
-                  <div className="h-4 w-16 rounded-full bg-muted dark:bg-white/10" />
+                  <div className="h-3 w-12 rounded bg-muted" />
+                  <div className="h-4 w-16 rounded-full bg-muted" />
                 </div>
-                <div className="h-4 w-3/4 rounded bg-muted dark:bg-white/10" />
+                <div className="h-4 w-3/4 rounded bg-muted" />
               </div>
             </div>
           </article>

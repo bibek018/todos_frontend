@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
@@ -19,7 +18,7 @@ export const Header = () => {
 
   return user ? (
     // Logged-in Header
-    <header className="w-full border-b border-black/10 bg-gray-50 px-4 py-4 text-black dark:border-white/10 dark:bg-slate-900 dark:text-white sm:px-6 md:px-10 md:py-5">
+    <header className="w-full border-b border-border bg-background px-4 py-4 text-foreground sm:px-6 md:px-10 md:py-5">
       <div className="flex flex-col gap-4">
 
         {/* App name + welcome */}
@@ -28,7 +27,7 @@ export const Header = () => {
             TODO WORKSPACE
           </h2>
 
-          <p className="mt-1 text-base font-semibold text-slate-700 dark:text-white sm:text-lg">
+          <p className="mt-1 text-base font-semibold text-foreground sm:text-lg">
             Welcome back, {user.name}!
           </p>
         </div>
@@ -36,7 +35,7 @@ export const Header = () => {
         {/* Description + user actions */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
-          <p className="text-sm leading-6 text-slate-600 dark:text-slate-400 sm:text-base">
+          <p className="text-sm leading-6 text-muted-foreground sm:text-base">
             Keep track of your tasks and update your progress quickly.
           </p>
 
@@ -51,6 +50,9 @@ export const Header = () => {
             <span className="max-w-55 truncate rounded-full border border-border/50 bg-muted px-3 py-1 text-xs text-muted-foreground sm:max-w-none sm:text-sm">
               {user.email}
             </span>
+
+            {/* Theme controls */}
+            <ThemeToggle/>
 
             {/* Logout */}
             <Button
@@ -75,7 +77,7 @@ export const Header = () => {
             TODO WORKSPACE
           </h2>
 
-          <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400 sm:text-base">
+          <p className="mt-1 text-sm leading-6 text-muted-foreground sm:text-base">
             Keep track of your tasks and update your progress quickly.
           </p>
         </section>

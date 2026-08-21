@@ -48,7 +48,7 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
   return (
     <Dialog>
       <DialogTrigger
-        className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background dark:border-white/10 dark:bg-white/5 text-cyan-600 dark:text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-500 dark:hover:text-cyan-200"
+        className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background text-cyan-600 dark:text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/10 hover:text-cyan-500 dark:hover:text-cyan-200"
         aria-label="Edit todo"
       >
         <PencilLine className="h-4 w-4" />
@@ -82,7 +82,7 @@ export const UpdateDialog = ({ todo, setUserTodos }: TodoHandler) => {
                 id={`status-${todo._id}`}
                 name="status"
                 defaultValue={todo.status}
-                className="h-9 w-full min-w-0 rounded-lg border border-input bg-background px-2.5 py-1 text-sm text-foreground outline-none transition duration-200 focus:ring-2 focus-visible:ring-ring/50 dark:bg-slate-900"
+                className="h-9 w-full min-w-0 rounded-lg border border-input bg-background px-2.5 py-1 text-sm text-foreground outline-none transition duration-200 focus:ring-2 focus-visible:ring-ring/50"
               >
                 <option value="not started" className="bg-background text-foreground">not started</option>
                 <option value="in progress" className="bg-background text-foreground">in progress</option>

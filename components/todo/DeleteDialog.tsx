@@ -29,7 +29,7 @@ export const DeleteDialog = ({ todo, setUserTodos }: Todohandler) => {
   return (
     <Dialog>
       <DialogTrigger
-        className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background dark:border-white/10 dark:bg-white/5 text-rose-600 dark:text-rose-300 transition hover:border-rose-400/40 hover:bg-rose-400/10 hover:text-rose-500 dark:hover:text-rose-200"
+        className="inline-flex size-10 items-center justify-center rounded-full border border-border bg-background text-rose-600 dark:text-rose-300 transition hover:border-rose-400/40 hover:bg-rose-400/10 hover:text-rose-500 dark:hover:text-rose-200"
         aria-label="Delete todo"
       >
         <Trash2 className="h-4 w-4" />
