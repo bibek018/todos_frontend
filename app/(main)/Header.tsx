@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { UserMenu } from "@/components/utils/UserMenu";
 import ThemeToggle from "@/components/ThemeToggle"
 
 export const Header = () => {
@@ -18,7 +19,7 @@ export const Header = () => {
 
   return user ? (
     // Logged-in Header
-    <header className="w-full border-b border-border bg-background px-4 py-4 text-foreground sm:px-6 md:px-10 md:py-5">
+    <header className="w-full border-b-4 border-border bg-background px-4 py-4 text-foreground sm:px-6 md:px-10 md:py-5">
       <div className="flex flex-col gap-4">
 
         {/* App name + welcome */}
@@ -50,18 +51,9 @@ export const Header = () => {
             <span className="max-w-55 truncate rounded-full border border-border/50 bg-muted px-3 py-1 text-xs text-muted-foreground sm:max-w-none sm:text-sm">
               {user.email}
             </span>
-
             {/* Theme controls */}
             <ThemeToggle/>
-
-            {/* Logout */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={logout}
-            >
-              Logout
-            </Button>
+            <UserMenu/>
           </div>
         </div>
       </div>

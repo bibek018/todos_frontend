@@ -8,9 +8,9 @@ export default function Home() {
   const router = useRouter();
    useEffect(() => {
     if (!user) {
-      router.replace("/");
+      router.replace("/login");
     }
-  }, [user, router]);
+  }, []);
 
   return (
      

@@ -23,7 +23,7 @@ export const AuthContextProvider = ({
       await api.post("/auth/logout");
       setUser(null);
       setAccessToken("");
-      router.replace("/");
+      router.push("/");
     } catch (err) {
       console.log(err);
     }
