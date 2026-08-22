@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { setToken } from "@/lib/Token";
 import { useRouter } from "next/navigation";
 import { RefreshResponse, User } from "@/types/type";
-import Loading from "@/app/loading";
+import Loading from "@/app/settings/loading";
 import axios from "axios";
 
 export const AuthContextProvider = ({
@@ -45,7 +45,6 @@ export const AuthContextProvider = ({
         setToken(response.data.accessToken);
         setUser(response.data.user);
         setAccessToken(response.data.accessToken);
-        router.push("/dashboard");
       } catch (err) {
         if (axios.isCancel(err)) return;
         console.log(err);

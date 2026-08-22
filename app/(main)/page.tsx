@@ -1,4 +1,15 @@
+"use client";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 export default function Home() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    if (user && !isLoading) {
+      router.replace("/dashboard");
+    }
+  }, [user, isLoading, router]);
   return (
     <main className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* Hero Section */}
@@ -24,8 +35,8 @@ export default function Home() {
           {/* Description */}
           <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
             Keep your daily tasks organized in one simple place. Create todos,
-            track their progress, update their status, and stay focused on
-            what matters.
+            track their progress, update their status, and stay focused on what
+            matters.
           </p>
 
           {/* Buttons */}
@@ -66,13 +77,11 @@ export default function Home() {
               ✓
             </div>
 
-            <h3 className="text-xl font-semibold">
-              Create Todos
-            </h3>
+            <h3 className="text-xl font-semibold">Create Todos</h3>
 
             <p className="mt-3 leading-7 text-muted-foreground">
-              Quickly add tasks whenever something needs your attention.
-              Keep everything in one organized list.
+              Quickly add tasks whenever something needs your attention. Keep
+              everything in one organized list.
             </p>
           </div>
 
@@ -82,9 +91,7 @@ export default function Home() {
               ↻
             </div>
 
-            <h3 className="text-xl font-semibold">
-              Track Progress
-            </h3>
+            <h3 className="text-xl font-semibold">Track Progress</h3>
 
             <p className="mt-3 leading-7 text-muted-foreground">
               Update your tasks as you work. Move them between different
@@ -98,9 +105,7 @@ export default function Home() {
               ⚡
             </div>
 
-            <h3 className="text-xl font-semibold">
-              Stay Productive
-            </h3>
+            <h3 className="text-xl font-semibold">Stay Productive</h3>
 
             <p className="mt-3 leading-7 text-muted-foreground">
               Focus on the tasks that matter most and turn your plans into
