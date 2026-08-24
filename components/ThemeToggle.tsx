@@ -15,7 +15,7 @@ function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex h-9 w-[108px] items-center gap-1 rounded-full border border-border bg-muted/20 p-1" />
+      <div className="flex h-9 w-27 items-center gap-1 rounded-full border border-border bg-muted/20 p-1" />
     );
   }
 

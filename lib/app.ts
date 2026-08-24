@@ -4,10 +4,7 @@ import axiosRetry from "axios-retry";
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
-  timeout:2000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  timeout:8000,
 });
 const refreshApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,

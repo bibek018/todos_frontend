@@ -29,10 +29,20 @@ export function UserMenu() {
   const handleSetting = () => {
     router.push("/settings");
   };
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline">Menu</Button>} />
+      <DropdownMenuTrigger>
+        {user?.avatarUrl ? (
+          <img
+            src={user.avatarUrl}
+            alt="Profile"
+            className="h-8 w-8 rounded-full"
+          />
+        ) : (
+          <span>Menu</span>
+        )}
+      </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-48" align="end">
         {/* Settings */}
