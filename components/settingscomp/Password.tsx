@@ -16,19 +16,20 @@ import { useState } from "react";
 import api from "@/lib/app";
 import { toast } from "sonner";
 import axios from "axios";
+import { FieldErrors } from "@/types/type";
 export const Password = () => {
-  const [error, setError] = useState<string>("");
-
+  const [errors, setErrors] = useState<FieldErrors>();
   const handlePassWordChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    const form = e.currentTarget;
+    setErrors({});
     try {
       const formdata = new FormData(e.currentTarget);
       const currentPassword = formdata.get("currentpassword");
       const newPassword = formdata.get("newpassword");
       const confirmNewPassword = formdata.get("confirmnewpassword");
       if (newPassword !== confirmNewPassword) {
-        setError("New password and confirm password do not match");
+        toast.error("New password and confirm password do not match");
         return;
       }
       const response = await api.put<{ success: true; message: string }>(
@@ -39,12 +40,20 @@ export const Password = () => {
           confirmNewPassword,
         },
       );
-
-      setError("");
-
+      form.reset();
+      setErrors({});
       toast.success(response.data.message);
     } catch (err) {
       if (axios.isAxiosError(err)) {
+        const details = err?.response?.data?.details;
+        if (details) {
+          const fieldErrors: FieldErrors = {};
+          details.map((item: { field: string; message: string }) => {
+            fieldErrors[item.field as keyof FieldErrors] = item.message;
+          });
+          setErrors(fieldErrors);
+          return;
+        }
         toast.error(err.response?.data?.message || "Something went wrong");
       }
     }
@@ -81,11 +90,20 @@ export const Password = () => {
               required
             />
 
+            {errors?.currentPassword &&  (
+              <p className="text-sm text-destructive">
+                {errors?.currentPassword}
+              </p>
+            )}
+
             <Label htmlFor="newpassword" className="mt-2">
               New Password
             </Label>
 
             <PasswordInput id="newpassword" name="newpassword" required />
+            {errors?.newPassword && (
+              <p className="text-sm text-destructive">{errors?.newPassword}</p>
+            )}
 
             <Label htmlFor="confirmpassword" className="mt-2">
               Confirm New Password
@@ -96,7 +114,12 @@ export const Password = () => {
               name="confirmnewpassword"
               required
             />
-            {error && <span className="text-red-400 font-bold">{error}</span>}
+            {errors?.confirmNewPassword && (
+              <p className="text-sm text-destructive">
+                {errors?.confirmNewPassword}
+              </p>
+            )}
+
           </div>
 
           <div className="flex justify-stretch sm:justify-end">

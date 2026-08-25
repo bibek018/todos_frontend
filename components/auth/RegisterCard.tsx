@@ -15,8 +15,12 @@ import Link from "next/link";
 import api from "@/lib/app";
 import { useRouter } from "next/navigation";
 import { PasswordInput } from "../utils/password-input";
+import { useState } from "react";
+import { Span } from "next/dist/trace";
+import axios from "axios";
 
 const RegisterCard = () => {
+  const [error, setError] = useState<string>("");
   const router = useRouter();
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -30,7 +34,8 @@ const RegisterCard = () => {
       });
       router.replace("/login");
     } catch (err) {
-      console.log(err);
+      if(axios.isAxiosError(err))
+      setError(err?.response?.data?.message);
     }
   };
   return (
@@ -79,6 +84,7 @@ const RegisterCard = () => {
               </div>
               <PasswordInput id="password" name="password" required/>
             </div>
+            {error && <span className="text-destructive font-semi-bold text-center ">{error}</span>}
           <Button type="submit" className="w-full">
             Register
           </Button>

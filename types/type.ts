@@ -40,3 +40,8 @@ export interface RefreshResponse{
     accessToken:string
 }
 export type TodoState = "loading"|"success" | "error";
+export type FieldErrors = {
+    currentPassword?: string;
+    newPassword?: string;
+    confirmNewPassword?: string;
+  };
