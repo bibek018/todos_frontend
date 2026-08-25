@@ -11,14 +11,43 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { LockKeyhole } from "lucide-react";
-
+import { PasswordInput } from "../utils/password-input";
+import { useState } from "react";
+import api from "@/lib/app";
+import { toast } from "sonner";
+import axios from "axios";
 export const Password = () => {
-  const handlePassWordChange = (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const [error, setError] = useState<string>("");
+
+  const handlePassWordChange = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formdata = new FormData(e.currentTarget);
+    try {
+      const formdata = new FormData(e.currentTarget);
+      const currentPassword = formdata.get("currentpassword");
+      const newPassword = formdata.get("newpassword");
+      const confirmNewPassword = formdata.get("confirmnewpassword");
+      if (newPassword !== confirmNewPassword) {
+        setError("New password and confirm password do not match");
+        return;
+      }
+      const response = await api.put<{ success: true; message: string }>(
+        "/users/me/changepassword",
+        {
+          currentPassword,
+          newPassword,
+          confirmNewPassword,
+        },
+      );
+
+      setError("");
+
+      toast.success(response.data.message);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        toast.error(err.response?.data?.message || "Something went wrong");
+      }
+    }
   };
 
   return (
@@ -42,56 +71,36 @@ export const Password = () => {
       </CardHeader>
 
       <CardContent className="p-0 pt-6">
-        <form
-          className="flex flex-col gap-6"
-          onSubmit={handlePassWordChange}
-        >
+        <form className="flex flex-col gap-6" onSubmit={handlePassWordChange}>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="password">
-              Current Password
-            </Label>
+            <Label htmlFor="password">Current Password</Label>
 
-            <Input
-              type="password"
-              id="password"
-              name="password"
-              className="bg-input"
+            <PasswordInput
+              id="currentpassword"
+              name="currentpassword"
+              required
             />
 
-            <Label
-              htmlFor="newpassword"
-              className="mt-2"
-            >
+            <Label htmlFor="newpassword" className="mt-2">
               New Password
             </Label>
 
-            <Input
-              type="password"
-              id="newpassword"
-              name="newpassword"
-              className="bg-input"
-            />
+            <PasswordInput id="newpassword" name="newpassword" required />
 
-            <Label
-              htmlFor="confirmpassword"
-              className="mt-2"
-            >
+            <Label htmlFor="confirmpassword" className="mt-2">
               Confirm New Password
             </Label>
 
-            <Input
-              type="password"
-              id="confirmpassword"
-              name="confirmpassword"
-              className="bg-input"
+            <PasswordInput
+              id="confirmnewpassword"
+              name="confirmnewpassword"
+              required
             />
+            {error && <span className="text-red-400 font-bold">{error}</span>}
           </div>
 
           <div className="flex justify-stretch sm:justify-end">
-            <Button
-              type="submit"
-              className="w-full sm:w-auto"
-            >
+            <Button type="submit" className="w-full sm:w-auto">
               Change Password
             </Button>
           </div>

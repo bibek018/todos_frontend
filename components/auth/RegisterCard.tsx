@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import api from "@/lib/app";
 import { useRouter } from "next/navigation";
+import { PasswordInput } from "../utils/password-input";
 
 const RegisterCard = () => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const RegisterCard = () => {
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
               </div>
-              <Input id="password" name="password" type="password" required />
+              <PasswordInput id="password" name="password" required/>
             </div>
           <Button type="submit" className="w-full">
             Register

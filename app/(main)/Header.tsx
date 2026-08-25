@@ -4,7 +4,6 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { UserMenu } from "@/components/utils/UserMenu";
-import ThemeToggle from "@/components/ThemeToggle"
 
 export const Header = () => {
   const { user, logout } = useAuth();
@@ -21,7 +20,6 @@ export const Header = () => {
     // Logged-in Header
     <header className="w-full border-b-4 border-border bg-background px-4 py-4 text-foreground sm:px-6 md:px-10 md:py-5">
       <div className="flex flex-col gap-4">
-
         {/* App name + welcome */}
         <div>
           <h2 className="text-lg font-bold text-blue-500 sm:text-xl md:text-2xl">
@@ -35,13 +33,11 @@ export const Header = () => {
 
         {/* Description + user actions */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-
           <p className="text-sm leading-6 text-muted-foreground sm:text-base">
             Keep track of your tasks and update your progress quickly.
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-
+          <div className="flex flex-wrap items-center justify-end gap-2">
             {/* Role */}
             <span className="rounded-full bg-blue-400 px-3 py-1 text-xs font-semibold text-slate-950 sm:text-sm">
               {user.role}
@@ -52,8 +48,8 @@ export const Header = () => {
               {user.email}
             </span>
             {/* Theme controls */}
-            <ThemeToggle/>
-            <UserMenu/>
+
+            <UserMenu />
           </div>
         </div>
       </div>
@@ -62,7 +58,6 @@ export const Header = () => {
     // Logged-out Header
     <header className="w-full border-b border-border bg-background/80 px-4 py-4 text-foreground backdrop-blur-md sm:px-6 md:px-10 md:py-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
         {/* App information */}
         <section>
           <h2 className="text-lg font-bold text-blue-500 sm:text-xl md:text-2xl">
@@ -76,31 +71,21 @@ export const Header = () => {
 
         {/* Right side */}
         <section className="flex flex-col items-center justify-center gap-3">
-
-          {/* Theme controls */}
-          <section className="flex items-center justify-center gap-2">
-
-            <ThemeToggle/>
-
-          </section>
-
           {/* Auth buttons */}
           <section className="flex gap-2 sm:gap-3">
-
             <Button
-              className="h-9 bg-white px-4 text-sm font-semibold text-black hover:bg-white/80 sm:h-10 sm:px-5"
+              className="h-9 bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/80 sm:h-10 sm:px-5"
               onClick={handleLogin}
             >
               Login
             </Button>
 
             <Button
-              className="h-9 bg-white px-4 text-sm font-semibold text-black hover:bg-white/80 sm:h-10 sm:px-5"
+              className="h-9 bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/80 sm:h-10 sm:px-5"
               onClick={handleRegister}
             >
               Register
             </Button>
-
           </section>
         </section>
       </div>

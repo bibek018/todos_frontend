@@ -21,6 +21,7 @@ import { useAuth } from "@/context/AuthContext";
 import { setToken } from "@/lib/Token";
 import { useState } from "react";
 import axios from "axios";
+import { PasswordInput } from "../utils/password-input";
 export function LoginCard() {
   const { setUser } = useAuth();
   const [errorMsg, setErrorMsg] = useState<string|null>(null);
@@ -104,7 +105,7 @@ export function LoginCard() {
                   Forgot your password?
                 </a>
               </div>
-              <Input id="password" name="password" type="password" required />
+              <PasswordInput id="password" name="password" required/>
             </div>
             { errorMsg && (
               <div className="font-semibold text-red-400 w-full text-center " >{errorMsg}</div>
