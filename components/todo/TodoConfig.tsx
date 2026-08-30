@@ -236,7 +236,7 @@ export const TodoConfig = () => {
               </h3>
 
               <span className="rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
-                {userTodos.length}{" "}
+                {pagination.total}{" "}
                 {pagination.total === 1 ? "task found" : "tasks found"}
               </span>
             </div>
