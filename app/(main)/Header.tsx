@@ -37,7 +37,7 @@ export const Header = () => {
             Keep track of your tasks and update your progress quickly.
           </p>
 
-          <div className="flex flex-wrap items-center justify-end gap-2">
+          <div className="flex flex-row items-center justify-end gap-2">
             {/* Role */}
             <span className="rounded-full bg-blue-400 px-3 py-1 text-xs font-semibold text-slate-950 sm:text-sm">
               {user.role}
