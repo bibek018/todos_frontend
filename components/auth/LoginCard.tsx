@@ -27,12 +27,11 @@ export function LoginCard() {
   const [errorMsg, setErrorMsg] = useState<string|null>(null);
   const router = useRouter();
   const handleGoogleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    window.location.href = `${process.env.API_URL}/auth/google`;
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`;
    
   };
   const handleGitHubLogin=()=>{
-    window.location.href=`${process.env.API_URL}/auth/github`
-  
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/github`;
   }
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {

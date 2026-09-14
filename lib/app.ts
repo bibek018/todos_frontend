@@ -2,12 +2,12 @@ import { getAccessToken, setToken } from "@/lib/Token";
 import axios, { AxiosError } from "axios";
 import axiosRetry from "axios-retry";
 const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   withCredentials: true,
   timeout: 8000,
 });
 const refreshApi = axios.create({
-  baseURL: `${process.env.API_URL}`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   withCredentials: true,
 });
 axiosRetry(api, {
