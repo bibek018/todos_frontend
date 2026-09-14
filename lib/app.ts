@@ -4,24 +4,21 @@ import axiosRetry from "axios-retry";
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
-  timeout:8000,
+  timeout: 8000,
 });
 const refreshApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
   withCredentials: true,
 });
 axiosRetry(api, {
   retries: 3,
   retryDelay: axiosRetry.exponentialDelay,
   retryCondition: (error: AxiosError) =>
-    (axiosRetry.isNetworkError(error) ||
-      (error.response?.status ?? 0) >= 500)
-
-})
+    axiosRetry.isNetworkError(error) || (error.response?.status ?? 0) >= 500,
+});
 api.interceptors.request.use(
   (config) => {
     const accesstoken = getAccessToken();
-
 
     if (accesstoken) {
       config.headers.Authorization = `Bearer ${accesstoken}`;
@@ -37,18 +34,16 @@ api.interceptors.response.use(
   (response) => {
     return response;
   },
- async (error) => {
+  async (error) => {
     const originalRequest = error.config;
 
-    if(error.response?.status ===401 && !originalRequest?._retry){
-      originalRequest._retry=true;
-      try{
-        const response  = await refreshApi.post("/auth/refresh");
+    if (error.response?.status === 401 && !originalRequest?._retry) {
+      originalRequest._retry = true;
+      try {
+        const response = await refreshApi.post("/auth/refresh");
         setToken(response.data.accessToken);
         return api(originalRequest);
-
-      }
-      catch(refresherror){
+      } catch (refresherror) {
         setToken("");
         return Promise.reject(refresherror);
       }
