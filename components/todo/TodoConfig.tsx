@@ -124,7 +124,7 @@ export const TodoConfig = () => {
     if (!isLoading && user) {
       getUserTodos();
     }
-  }, [isLoading, user, todoStatus,userTodos, todoPriority, sortNOrder, page, limit]);
+  }, [isLoading, user, todoStatus, todoPriority, sortNOrder, page, limit]);
 
   return (
     <div className="w-full max-w-6xl mx-auto space-y-8">
