@@ -15,13 +15,15 @@ import { Trash2 } from "lucide-react";
 interface Todohandler {
   todo: todo;
   setUserTodos: React.Dispatch<React.SetStateAction<todo[] | []>>;
+  getUserTodos:()=>{}
 }
 
-export const DeleteDialog = ({ todo, setUserTodos }: Todohandler) => {
+export const DeleteDialog = ({ todo, setUserTodos , getUserTodos}: Todohandler) => {
   const handleDelete = async () => {
     try {
       await api.delete(`/todos/${todo._id}`);
       setUserTodos((current) => current.filter((t) => t._id !== todo._id));
+      await getUserTodos();
     } catch (err) {
       console.log(err);
     }

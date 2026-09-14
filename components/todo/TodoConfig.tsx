@@ -250,6 +250,7 @@ export const TodoConfig = () => {
                       key={todo._id}
                       todo={todo}
                       setUserTodos={setUserTodos}
+                      getUserTodos={getUserTodos}
                     />
                   ))}
                 </div>

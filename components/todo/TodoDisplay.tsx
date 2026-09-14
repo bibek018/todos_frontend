@@ -6,9 +6,10 @@ import { todo } from "@/types/type";
 interface Todohandler {
   todo: todo;
   setUserTodos: React.Dispatch<React.SetStateAction<todo[] | []>>;
+  getUserTodos:()=>{}
 }
 
-export const TodoDisplay = ({ todo, setUserTodos }: Todohandler) => {
+export const TodoDisplay = ({ todo, setUserTodos, getUserTodos }: Todohandler) => {
   const statusTone =
     todo.status === "completed"
       ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20"
@@ -57,7 +58,7 @@ export const TodoDisplay = ({ todo, setUserTodos }: Todohandler) => {
         {/* Actions */}
         <div className="flex items-center justify-end gap-2 border-t border-border/50 pt-3.5">
           <UpdateDialog todo={todo} setUserTodos={setUserTodos} />
-          <DeleteDialog todo={todo} setUserTodos={setUserTodos} />
+          <DeleteDialog todo={todo} setUserTodos={setUserTodos} getUserTodos={getUserTodos}/>
         </div>
       </div>
     </article>
