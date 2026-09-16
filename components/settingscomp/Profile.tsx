@@ -25,6 +25,23 @@ export const Profile = () => {
   const { user, setUser, isLoading } = useAuth();
   const hasChanged = name.trim() !== (user?.name ?? "") || file !== null;
 
+  const chosePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+
+    if (!selectedFile) {
+      setFile(null);
+      return;
+    }
+
+    if (selectedFile.size > 2 * 1024 * 1024) {
+      toast.error("Image size exceeded 2 MB.");
+      e.target.value = "";
+      setFile(null);
+      return;
+    }
+
+    setFile(selectedFile);
+  };
   useEffect(() => {
     if (!user && !isLoading) {
       router.replace("/");
@@ -41,7 +58,6 @@ export const Profile = () => {
 
     try {
       const formdata = new FormData(e.currentTarget);
-
       const response = await api.put<UserResponse>("/users/me", formdata);
 
       setUser(response.data.user);
@@ -117,9 +133,7 @@ export const Profile = () => {
                 name="avatar"
                 type="file"
                 className="hidden"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFile(e.target.files?.[0] ?? null);
-                }}
+                onChange={chosePhoto}
               />
 
               <div className="h-5 w-full max-w-52">
